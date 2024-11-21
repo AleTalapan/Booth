@@ -14,7 +14,6 @@ architecture Behavioral of ShiftRegister_tb is
 
     constant clk_period : time := 10 ns;
 begin
-    -- Instan?ierea direct? a entit??ii ShiftRegister
     uut: entity work.ShiftRegister
         Port map (
             clk => clk,
@@ -25,7 +24,6 @@ begin
             data_out => data_out
         );
 
-    -- Proces pentru generarea semnalului de ceas
     clk_process : process
     begin
         while True loop
@@ -36,7 +34,6 @@ begin
         end loop;
     end process;
 
-    -- Proces pentru generarea semnalelor de test
     stim_proc: process
     begin
         -- Testare reset
@@ -52,7 +49,7 @@ begin
         load <= '0';
         wait for clk_period;
 
-        -- Activ?m shiftarea la dreapta
+        -- Activam shiftarea la dreapta
         enable <= '1';
         
         -- Continu?m shiftarea la dreapta pentru câteva cicluri de ceas

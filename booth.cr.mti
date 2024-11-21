@@ -17,14 +17,13 @@ Model Technology ModelSim ALTERA vcom 6.5b Compiler 2009.10 Oct  1 2009
 -- Loading package std_logic_unsigned
 -- Loading entity alu
 
-} {} {}} C:/Users/Iulian/b/shift_reg_tb.vhd {1 {vcom -work work -2002 -explicit C:/Users/Iulian/b/shift_reg_tb.vhd
+} {} {}} C:/Users/Iulian/b/shift_reg.vhd {1 {vcom -work work -2002 -explicit C:/Users/Iulian/b/shift_reg.vhd
 Model Technology ModelSim ALTERA vcom 6.5b Compiler 2009.10 Oct  1 2009
 -- Loading package standard
 -- Loading package std_logic_1164
--- Compiling entity shiftregister_tb
--- Compiling architecture behavioral of shiftregister_tb
 -- Loading package std_logic_arith
 -- Loading package std_logic_unsigned
--- Loading entity shiftregister
+-- Compiling entity shiftregister
+-- Compiling architecture behavioral of shiftregister
 
 } {} {}}
