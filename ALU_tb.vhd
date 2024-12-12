@@ -5,44 +5,32 @@ entity ALU_tb is
 end ALU_tb;
 
 architecture sim of ALU_tb is
-    signal clk      : std_logic := '0';
     signal A, M     : std_logic_vector(7 downto 0) := (others => '0');
     signal control  : std_logic;
     signal result   : std_logic_vector(7 downto 0);
 
-    -- Frecven?a semnalului de ceas (perioad? de 50 ns => frecven?? de 20 MHz)
-    constant clk_period : time := 50 ns;
-
 begin
    uut: entity work.ALU port map (
-        clk => clk,
         A => A,
         M => M,
         control => control,
         result => result
     );
 
-    clk_process : process
-    begin
-        clk <= '0';
-        wait for clk_period / 2;
-        clk <= '1';
-        wait for clk_period / 2;
-    end process clk_process;
 
     stim_proc: process
     begin
         A <= "00000010"; M <= "00000001"; control <= '0'; 
-        wait for 2*clk_period;
+        wait for 100 ns;
         
         assert result = "00000011"
-        report "Adunare incorect?!" severity error;
+        report "Adunare incorecta!" severity error;
 
         A <= "00000010"; M <= "00000001"; control <= '1'; 
-        wait for 2*clk_period;
+        wait for 100 ns;
         
         assert result = "00000001"
-        report "Sc?dere incorect?!" severity error;
+        report "Scadere incorecta!" severity error;
 
         wait;
     end process stim_proc;

@@ -10,7 +10,6 @@ entity BoothControl is
         start     : in STD_LOGIC;                -- Semnal de pornire
         q_0       : in STD_LOGIC;                -- Ultimul bit al registrului
         q_minus_1 : in STD_LOGIC;                -- Bitul adiacent (Q-1)
-        counter   : in STD_LOGIC_VECTOR(2 downto 0); -- Contorul pentru cicluri
         done      : out STD_LOGIC;               -- Semnal de finalizare
         alu_op    : out STD_LOGIC;               -- Semnal pentru opera?ia ALU
         shift     : out STD_LOGIC                -- Semnal pentru deplasare
@@ -29,13 +28,15 @@ begin
         end if;
     end process;
 
-    process (current_state, start, q_0, q_minus_1, counter)
+    process (current_state, start, q_0, q_minus_1)
+    variable count: integer:=0;
     begin
         done <= '0';
         alu_op <= '0';
         shift <= '0';
         case current_state is
             when Idle =>
+                count:=0; --initializare count
                 if start = '1' then
                     next_state <= Load;
                 else
@@ -49,16 +50,17 @@ begin
                 if (q_0 = '1' and q_minus_1 = '0') then
                     alu_op <= '1'; -- Scade
                 elsif (q_0 = '0' and q_minus_1 = '1') then
-                    alu_op <= '0'; -- Adun?
+                    alu_op <= '0'; -- Aduna
                 end if;
                 next_state <= RShift;
-
+              
             when RShift =>
+                count:=count+1;
                 shift <= '1';
                 next_state <= Check;
 
             when Check =>
-                if counter = "000" then -- Toate ciclurile complete
+                if count >=8 then -- toate ciclurile complete
                     next_state <= Output;
                 else
                     next_state <= AddSub;

@@ -10,7 +10,9 @@ architecture Behavioral of ShiftRegister_tb is
     signal load     : STD_LOGIC := '0';
     signal enable   : STD_LOGIC := '0';
     signal data_in  : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
-    signal data_out : STD_LOGIC_VECTOR(7 downto 0);
+    signal data_in2  : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
+    signal data_out1 : STD_LOGIC_VECTOR(7 downto 0);
+    signal data_out2 : STD_LOGIC_VECTOR(7 downto 0);
 
     constant clk_period : time := 10 ns;
 begin
@@ -21,7 +23,9 @@ begin
             load => load,
             enable => enable,
             data_in  => data_in,
-            data_out => data_out
+            data_in2  => data_in2,
+            data_out1 => data_out1,
+            data_out2 => data_out2
         );
 
     clk_process : process
@@ -43,7 +47,8 @@ begin
         wait for clk_period;
         
         -- Introducem o valoare în registru
-        data_in <= "10101010";
+        data_in <= "10101011";
+        data_in2 <= "01101011";
         load <= '1';
         wait for clk_period;
         load <= '0';

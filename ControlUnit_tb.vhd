@@ -10,7 +10,6 @@ architecture Behavioral of BoothControl_tb is
     signal start     : STD_LOGIC := '0';
     signal q_0       : STD_LOGIC := '0';
     signal q_minus_1 : STD_LOGIC := '0';
-    signal counter   : STD_LOGIC_VECTOR(2 downto 0) := "111";
     signal done      : STD_LOGIC;
     signal alu_op    : STD_LOGIC;
     signal shift     : STD_LOGIC;
@@ -25,7 +24,6 @@ begin
             start     => start,
             q_0       => q_0,
             q_minus_1 => q_minus_1,
-            counter   => counter,
             done      => done,
             alu_op    => alu_op,
             shift     => shift
@@ -75,7 +73,6 @@ begin
 
         -- Test 4: Simulare Check
         wait for clk_period;
-        counter <= "000";
         wait for clk_period;
         assert (done = '1') report "Error: Done signal not asserted in Output state!" severity error;
 
